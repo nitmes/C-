@@ -2,9 +2,9 @@
 
 class Counter {
 private:
-	int counter=1;
+	int counter;
 public:
-	void set_counter(int counter) {
+	Counter(int counter) {
 		this->counter = counter;
 	}
 	void changer(std::string status) {
@@ -21,22 +21,27 @@ public:
 };
 int main(int argc, char** argv) {
 	setlocale(LC_ALL, "Russian");
-	Counter c;
-	int counter = 0;
-	std::string da;
+	int counter = 1;
+	Counter c(counter);
 	std::string status;
+	std::string da;
 	std::cout << "Вы хотите указать начальное значение счётчика? Введите y или n: ";
 	std::cin >> da;
 	if (da == "y") {
 		std::cout << "Введите начальное значение счётчика: ";
 		std::cin >> counter;
-		c.set_counter(counter);
 	}
+	Counter g(counter);
 	do {
 		std::cout << "Введите команду ('+', '-', '=' или 'x'): ";
 		std::cin >> status;
 		if (status == "+" || status == "-" || status == "=" || status == "x") {
-			c.changer(status);
+			if (da == "y") {
+				g.changer(status);
+			}
+			else {
+				c.changer(status);
+			}
 		}
 		else {
 			std::cout << "Неверный ввод! \n";
