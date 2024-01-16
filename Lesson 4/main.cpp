@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
 		f >> flat;
 		addresses[i] = address(city, streat, number, flat);
 	}
-	for (int i = 0; i < count; ++i) {
+	for (int i = count-1; i >= 0; --i) {
 		g << addresses[i].ad();
 	}
 	f.close();
