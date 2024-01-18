@@ -2,7 +2,7 @@
 #include "numcin.h"
 #include "numresult.h"
 
-#define MODE 2
+#define MODE 1
 
 #if !defined MODE || (MODE != 1 && MODE != 2)
 #error "Необходимо установить MODE в 1 или 2"

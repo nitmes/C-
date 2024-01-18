@@ -11,6 +11,9 @@ public:
 	virtual void print() {
 		std::cout << name;
 	}
+	void print_info(Figure* figure) {
+		std::cout << name<<"\n";
+	}
 };
 class Triangle :public Figure {
 protected:
@@ -32,7 +35,7 @@ public:
 		return("A=" + std::to_string(a_d) + " " + "B=" + std::to_string(b_d) + " " + "C=" + std::to_string(c_d) + "\n");
 	}
 	void print() override {
-		std::cout << name << ": \n";
+		print_info(this);
 		std::cout << "Стороны: ";
 		std::cout << get_sides();
 		std::cout << "Углы: ";
@@ -78,7 +81,7 @@ public:
 		return("A=" + std::to_string(a_d) + " " + "B=" + std::to_string(b_d) + " " + "C=" + std::to_string(c_d) + " " + "D=" + std::to_string(d_d) + "\n");
 	}
 	void print() override {
-		std::cout << name << ": \n";
+		print_info(this);
 		std::cout << "Стороны: ";
 		std::cout << get_sides();
 		std::cout << "Углы: ";
