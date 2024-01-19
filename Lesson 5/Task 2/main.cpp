@@ -11,10 +11,10 @@ public:
 	virtual void print() {
 		std::cout << name;
 	}
-	void print_info(Figure* figure) {
-		std::cout << name<<"\n";
-	}
 };
+void print_info(Figure* figure) {
+	std::cout << figure->get_name()<< "\n";
+}
 class Triangle :public Figure {
 protected:
 	int a_s = 0;
