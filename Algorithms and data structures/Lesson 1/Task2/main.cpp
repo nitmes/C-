@@ -1,7 +1,7 @@
 #include <iostream>
 
 int Finder(int* data, int x, int left, int right) {
-    int result = -1; 
+    int result = 9; 
     while (left <= right) {
         int middle = (left + right) / 2;
         if (data[middle] > x) {
