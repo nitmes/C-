@@ -89,11 +89,19 @@ int main(int argc, char** argv) {
     current_position(arr, current_pos);
     do {
         int newcurrent_pos = 0;
-        std::cout << "Введите команду: ";
+        std::cout << "Введите команду(up,right,left,exit): ";
         std::cin >> com;
-        newcurrent_pos = travel(com, current_pos, size);
-        std::cout << "Вы находитесь здесь: ";
-        current_position(arr, current_pos);
+        if (com == "up" || com == "right" || com == "left"||com=="exit") {
+            newcurrent_pos = travel(com, current_pos, size);
+            std::cout << "Вы находитесь здесь: ";
+            current_position(arr, newcurrent_pos);
+            current_pos = newcurrent_pos;
+        }
+        else {
+            std::cout << "Неверная команда! \n";
+            std::cout << "Вы находитесь здесь: ";
+            current_position(arr, current_pos);
+        }
     } while (com != "exit");
     return 0;
 }
