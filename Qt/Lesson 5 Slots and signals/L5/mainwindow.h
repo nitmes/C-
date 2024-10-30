@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "stopwatch.h"
 #include <QMainWindow>
 #include <QTimer>
 #include <QLabel>
@@ -19,19 +20,13 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-    void updateStopWatch();
-
-    void on_pushButton_3_clicked();
-
     void on_pushButton_2_clicked();
+    void on_pushButton_3_clicked();
+    void updateDisplay(const QString &time);
+    void displayLapTime(const QString &lapTime);
 
 private:
     Ui::MainWindow *ui;
-    QTimer *timer;
-    int elapsedMinutes;
-    int elapsedSeconds;
-    int elapsedMilliseconds;
-    int lapNumber;
-    int lastLapTime;
+    StopWatch stopwatch;
 };
 #endif // MAINWINDOW_H
