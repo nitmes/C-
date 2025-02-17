@@ -2,7 +2,6 @@
 
 
 #include "CppBaseActor.h"
-#include "Math/UnrealMathUtility.h"
 // Sets default values
 ACppBaseActor::ACppBaseActor()
 {
