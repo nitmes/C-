@@ -1,4 +1,4 @@
-?#include <iostream>
+#include <iostream>
 #include <string>
 #include <Wt/Dbo/Dbo.h>
 #include <WT/Dbo/Backend/Postgres.h>
@@ -77,7 +77,6 @@ public:
     }
 };
 
-//==============================================================================================
 
 void add_publisher(Wt::Dbo::Session& s, const std::string& name) {
     Wt::Dbo::Transaction transaction{ s };
@@ -205,14 +204,12 @@ void print_shop(Wt::Dbo::Session& s, const int id_publisher) {
     }
 }
 
-//===========================================================================================
-
 int main()
 {
     try
     {
         auto connection = std::make_unique < Wt::Dbo::backend::Postgres>(
-            "host=localhost port=5432 dbname=homework0505 user=postgres password="
+            "host=localhost port=5432 dbname=postgres user=postgres password="
         );
         Wt::Dbo::Session sess;
         sess.setConnection(std::move(connection));
@@ -221,7 +218,7 @@ int main()
         sess.mapClass<Shop>("shop");
         sess.mapClass<Stock>("stock");
         sess.mapClass<Sale>("sale");
-        //таблицы
+        //Создаём таблицы
         try
         {
             sess.createTables();
@@ -229,64 +226,64 @@ int main()
         catch (const std::exception& e) {
             std::cout << "Exeption create table: " << e.what() << std::endl;
         }
-        //издатели
+        //publisher
         try
         {
-            add_publisher(sess, "Piter");
-            add_publisher(sess, "AST");
-            add_publisher(sess, "Eksmo");
+            add_publisher(sess, "Slovo");
+            add_publisher(sess, "Booker");
+            add_publisher(sess, "BestB");
         }
         catch (const std::exception& e) {
             std::cout << "Exeption publisher: " << e.what() << std::endl;
         };
-        //книги
+        //books
         try
         {
-            add_book(sess, "Pelevin | Empire V", "Eksmo");
-            add_book(sess, "Braun | Inferno", "AST");
-            add_book(sess, "Remark | Tri tovarischa", "AST");
-            add_book(sess, "Kristi | Desyat negtityat", "Eksmo");
-            add_book(sess, "Zhukov | Soldat imperatora", "Piter");
+            add_book(sess, "Pemelev | Dust", "Slovo");
+            add_book(sess, "Robolev | Robots live", "Booker");
+            add_book(sess, "Markes | Lychie dryzua", "BestB");
+            add_book(sess, "Morgan | Red dead", "Booker");
+            add_book(sess, "Red | Cyberpunk", "Booker");
         }
         catch (const std::exception& e) {
             std::cout << "Exeption book: " << e.what() << std::endl;
         }
-        //Добавляем магазины
+        //shops
         try
         {
-            add_shop(sess, "Biblio globus");
-            add_shop(sess, "Dom knigi");
-            add_shop(sess, "Knigi");
+            add_shop(sess, "Global knigi");
+            add_shop(sess, "Slovoed");
+            add_shop(sess, "Books");
         }
         catch (const std::exception& e) {
             std::cout << "Exeption shop: " << e.what() << std::endl;
         }
-        //Добавляем книги в магазины
+        //books to shops
         try
         {
-            add_stock(sess, "Pelevin | Empire V", "Dom knigi", 4);
-            add_stock(sess, "Zhukov | Soldat imperatora", "Dom knigi", 2);
-            add_stock(sess, "Zhukov | Soldat imperatora", "Biblio globus", 1);
-            add_stock(sess, "Braun | Inferno", "Dom knigi", 1);
-            add_stock(sess, "Kristi | Desyat negtityat", "Biblio globus", 3);
-            add_stock(sess, "Remark | Tri tovarischa", "Biblio globus", 2);
-            add_stock(sess, "Pelevin | Empire V", "Knigi", 1);
-            add_stock(sess, "Kristi | Desyat negtityat", "Dom knigi", 3);
+            add_stock(sess, "Pemelev | Dust", "Global knigi",3);
+            add_stock(sess, "Robolev | Robots live", "Slovoed",1);
+            add_stock(sess, "Markes | Lychie dryzua", "Gloval knigi",1);
+            add_stock(sess, "Morgan | Red dead", "Slovoed",4);
+            add_stock(sess, "Morgan | Red dead", "Books", 2);
+            add_stock(sess, "Morgan | Red dead", "Global knigi", 5);
+            add_stock(sess, "Red | Cyberpunk", "Books",3);
+            add_stock(sess, "Red | Cyberpunk", "Slovoed", 3);
         }
         catch (const std::exception& e) {
             std::cout << "Exeption stock: " << e.what() << std::endl;
         }
-        //Делаем продажи
+        //make some money
         try
         {
-            make_sale(sess, 299, "2023-03-01", "Kristi | Desyat negtityat", "Biblio globus", 1);
-            make_sale(sess, 749, "2023-05-24", "Braun | Inferno", "Dom knigi", 1);
-            make_sale(sess, 1749, "2023-05-25", "Pelevin | Empire V", "Knigi", 1);
+            make_sale(sess, 299, "2023-03-01", "Morgan | Red dead", "Slovoed", 1);
+            make_sale(sess, 749, "2023-05-24", "Red | Cyberpunk", "Books", 1);
+            make_sale(sess, 1749, "2023-05-25", "Pemelev | Dust", "Global knigi", 1);
         }
         catch (const std::exception& e) {
             std::cout << "Exeption sales: " << e.what() << std::endl;
         }
-        //Выводим список магазинов, в которых продают книги этого издателя
+        //Shoops that sales this publisher
         int input;
         do {
             std::cout << "Insert id publisher (or 0 for exit): ";
