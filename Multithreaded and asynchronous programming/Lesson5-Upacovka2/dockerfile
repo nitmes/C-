@@ -1,0 +1,8 @@
+FROM alpine:latest
+    LABEL desc="Lesson5-Upacovka2"
+    RUN apk add --no-cache g++ clang git bash
+    WORKDIR /homework
+    RUN git clone https://github.com/nitmes/test test
+    RUN g++ -std=c++17 ./test/main.cpp -o testgcc
+    RUN clang++ -std=c++17 -stdlib=libstdc++ ./test/main.cpp -o testclang
+    CMD ["/bin/bash", "-c", "./testgcc; ./testclang;"]

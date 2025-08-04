@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
-LABEL desc="Lesson5-Upacovka"
-RUN apt-get update && apt-get install -y g++ nano
-WORKDIR /homework
-COPY hello.cpp .
-RUN g++ hello.cpp -o hello
-CMD ["./hello"]
+    LABEL desc="Lesson5-Upacovka"
+    RUN apt-get update && apt-get install -y g++ nano
+    WORKDIR /homework
+    COPY hello.cpp .
+    RUN g++ hello.cpp -o hello
+    CMD ["./hello"]
