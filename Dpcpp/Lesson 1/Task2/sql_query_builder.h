@@ -64,7 +64,7 @@ public:
             }
         }
 
-        select_request.append("FROM ").append(this->query.from_columns).append(" WEHRE");
+        select_request.append("FROM ").append(this->query.from_columns).append(" WHERE");
         {
             auto it = this->query.where_requst_vals.begin(); auto ended = this->query.where_requst_vals.end() - 1;
             for (auto smt : this->query.where_requst_vals) {
