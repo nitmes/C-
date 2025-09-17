@@ -15,7 +15,6 @@
 
 #include <map>
 
-// "Loop" forever accepting new connections.
 void httpServer(tcp::acceptor& acceptor, tcp::socket& socket, data_base& db)
 {
 	acceptor.async_accept(socket,

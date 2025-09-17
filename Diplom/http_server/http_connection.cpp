@@ -108,7 +108,7 @@ void HttpConnection::print_result(const std::vector<std::string>& searchResult)
 }
 void HttpConnection::print_result(const std::multimap<int, std::string, std::greater<int>>& searchResult)
 {
-	int result_size = 10; //максимальное количество выводимых результатов
+	int result_size = 10; 
 	response_.set(http::field::content_type, "text/html");
 	beast::ostream(response_.body())
 		<< "<html>\n"
@@ -226,7 +226,7 @@ void HttpConnection::createResponseGet()
 	}
 }
 
-//Обработка POST запроса (вывод результата)
+//POST
 void HttpConnection::createResponsePost()
 {
 	if (request_.target() == "/")
@@ -257,7 +257,6 @@ void HttpConnection::createResponsePost()
 			return;
 		}
 
-		// TODO: Fetch your own search results here
 
 		std::vector<std::string> keywords = get_keyword(value);
 
@@ -279,16 +278,13 @@ void HttpConnection::createResponsePost()
 					db_result_sort.insert({ value, key });
 				}
 				print_result(db_result_sort);
-				//print_result(convert_multimap_to_vector(db_result_sort));
 			}
 			else
 			{
-				//нет результата
 				print_not_found();
 			}
 		}
 		else {
-			//вывод что не верный запрос
 			print_bad_request();
 		}
 	}
@@ -332,7 +328,7 @@ void HttpConnection::checkDeadline()
 		});
 }
 
-//Разбивает POST запрос на уникальные слова из литинских букв длиньше 3 символов
+
 std::vector<std::string> HttpConnection::get_keyword(const std::string& str)
 {
 	const std::string letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -350,7 +346,7 @@ std::vector<std::string> HttpConnection::get_keyword(const std::string& str)
 		std::string sub_str = value.substr(pos_begin, pos_end - pos_begin);
 		if (sub_str.find_first_not_of(letters) == std::string::npos && sub_str.length() > 3)
 		{
-			if (std::find(result.begin(), result.end(), sub_str) == result.end()) // проверка на повторы
+			if (std::find(result.begin(), result.end(), sub_str) == result.end())
 			{
 				result.push_back(sub_str);
 			}
